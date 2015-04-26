@@ -21,6 +21,7 @@ import org.bukkit.event.player.*;
 
 import java.util.ArrayList;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
@@ -109,6 +110,33 @@ public class SpectateListener implements Listener {
                     Vector velocity = arrow.getVelocity();
                     damaged.teleport(damaged.getLocation().add(0, 2, 0));
                     Arrow nextArrow = arrow.getShooter().launchProjectile(Arrow.class);
+                    nextArrow.setVelocity(velocity);
+                    nextArrow.setBounce(false);
+                    nextArrow.setShooter(arrow.getShooter());
+                    e.setCancelled(true);
+                    arrow.remove();
+                }
+
+            }
+        }
+    }
+    
+    @EventHandler
+    public void onPlayerHitByPlayerEP(EntityDamageByEntityEvent e)
+    {
+        Entity entityDamager = e.getDamager();
+        Entity entityDamaged = e.getEntity();
+
+        if (entityDamager instanceof EnderPearl) {
+            EnderPearl arrow = (EnderPearl) entityDamager;
+            if (entityDamaged instanceof Player && arrow.getShooter() instanceof Player) {
+
+                Player damaged = (Player) entityDamaged;
+                if (Spectate.getAPI().isSpectating(damaged))
+                {
+                    Vector velocity = arrow.getVelocity();
+                    damaged.teleport(damaged.getLocation().add(0, 2, 0));
+                    EnderPearl nextArrow = arrow.getShooter().launchProjectile(EnderPearl.class);
                     nextArrow.setVelocity(velocity);
                     nextArrow.setBounce(false);
                     nextArrow.setShooter(arrow.getShooter());
