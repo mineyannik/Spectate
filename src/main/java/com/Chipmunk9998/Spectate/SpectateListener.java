@@ -180,7 +180,7 @@ public class SpectateListener implements Listener {
 
                     if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
 
-                        if (Bukkit.getServer().getOnlinePlayers().length > 2) {
+                        if (Bukkit.getServer().getOnlinePlayers().size() > 2) {
 
                             Spectate.getAPI().scrollLeft(event.getPlayer(), Spectate.getAPI().getSpectateablePlayers());
                             Spectate.getAPI().disableScroll(event.getPlayer(), 5);
@@ -190,7 +190,7 @@ public class SpectateListener implements Listener {
                     }
                     else if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 
-                        if (Bukkit.getServer().getOnlinePlayers().length > 2) {
+                        if (Bukkit.getServer().getOnlinePlayers().size() > 2) {
 
                             Spectate.getAPI().scrollRight(event.getPlayer(), Spectate.getAPI().getSpectateablePlayers());
                             Spectate.getAPI().disableScroll(event.getPlayer(), 5);
@@ -219,7 +219,7 @@ public class SpectateListener implements Listener {
 
                 if (Spectate.getAPI().getSpectateMode(event.getPlayer()) == SpectateMode.SCROLL) {
 
-                    if (Bukkit.getServer().getOnlinePlayers().length > 2) {
+                    if (Bukkit.getServer().getOnlinePlayers().size() > 2) {
 
                         Spectate.getAPI().scrollRight(event.getPlayer(), Spectate.getAPI().getSpectateablePlayers());
                         Spectate.getAPI().disableScroll(event.getPlayer(), 5);
